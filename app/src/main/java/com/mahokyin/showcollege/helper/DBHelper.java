@@ -99,12 +99,8 @@ public class DBHelper extends SQLiteOpenHelper {
 	public College getCollege(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
-//		Cursor cursor = db.query(TABLE_COLLEGE, new String[] { KEY_ID,
-//						KEY_NAME, KEY_DOMAIN, KEY_WEB_PAGE, KEY_COUNTRY, KEY_COUNTRY_CODE}, KEY_ID + "=?",
-//				new String[] { String.valueOf(id) }, null, null, null, null);
-
 		Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_COLLEGE + " WHERE " +
-				KEY_ID + "=?", new String[] { Integer.toString(id) } );
+				KEY_ID + "=" + id + "", null );
 
 		if (cursor != null) {
 			cursor.moveToFirst();

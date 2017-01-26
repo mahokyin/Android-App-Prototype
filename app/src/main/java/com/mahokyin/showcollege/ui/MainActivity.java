@@ -123,11 +123,11 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
                     collegeList = new ArrayList<>();
                     if (PrefsManager.getFromPrefs(PreferenceKey.FIRST_USE, true)) {
                         if (list != null) {
-                            for (int i = 0; i < 1000; i++) {
+                            for (int i = 1; i <= 1000; i++) {
                                 AppController.getDbHelper().addCollege(list.get(i));
                             }
 
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 1; i <= 10; i++) {
                                 collegeList.add(AppController.getDbHelper().getCollege(i));
                             }
                             count = collegeList.size();
@@ -136,7 +136,10 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
                         Timber.d("Finish loading from default file");
                         e.onNext("Finish loading from default file");
                     } else {
-                        collegeList.addAll(AppController.getDbHelper().getAllColleges());
+                        for (int i = 1; i <= 10; i++) {
+                            collegeList.add(AppController.getDbHelper().getCollege(i));
+                        }
+                        count = collegeList.size();
                         Timber.d("Finish loading from SQL DB");
                         e.onNext("Finish loading from SQL DB");
                     }
@@ -180,12 +183,12 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
     }
 
     @Override
-    public void updateCollegeList(final RecyclerView.Adapter adapter) {
+    public void updateCollegeList() {
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
                 List<College> updateList = new ArrayList<>();
-                for (int i = count; i < count + 10; i++) {
+                for (int i = count + 1; i <= count + 10; i++) {
                     updateList.add(AppController.getDbHelper().getCollege(i));
                 }
                 collegeList.addAll(updateList);
@@ -208,7 +211,9 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
 
             @Override
             public void onComplete() {
-                adapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Count: " + count, Toast.LENGTH_LONG).show();
+                mainRecycleFragment.updateRecycleView();
+                mainRecycleFragment.setLoadingStatus(true);
             }
         });
     }

@@ -89,9 +89,8 @@ public class MainRecycleFragment extends Fragment {
                             if ( (visibleItemCount + pastVisiblesItems) >= totalItemCount)
                             {
                                 loading = false;
-                                mainActInterface.updateCollegeList(adapter);
+                                mainActInterface.updateCollegeList();
                                 //Do pagination.. i.e. fetch new data
-                                loading = true;
                             }
                         }
                     }
@@ -99,6 +98,14 @@ public class MainRecycleFragment extends Fragment {
             });
             recyclerView.setAdapter(adapter);
         }
+    }
+
+    public void updateRecycleView() {
+        adapter.notifyDataSetChanged();
+    }
+
+    public void setLoadingStatus(boolean value) {
+        loading = value;
     }
 
     @Override
@@ -169,8 +176,8 @@ public class MainRecycleFragment extends Fragment {
     }
 
     public interface MainActInterface {
-        public List<College> getList();
-        public void init(View view);
-        public void updateCollegeList(RecyclerView.Adapter adapter);
+        List<College> getList();
+        void init(View view);
+        void updateCollegeList();
     }
 }
