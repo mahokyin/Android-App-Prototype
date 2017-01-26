@@ -76,7 +76,7 @@ public class CollegeCardAdapter extends RecyclerView.Adapter<CollegeCardAdapter.
         holder.count.setText(college.getWebPage());
 
         // loading album cover using Glide library
-        String url = PrefsManager.getFromPrefs(PreferenceHeader.IMAGE_ID, college.getName(), "-1");
+        String url = PrefsManager.getFromPrefs(PreferenceHeader.IMAGE_ID, college.getDomain(), "-1");
         if (url.equals("-1")) {
 
             BingApiInterface apiService =
@@ -92,7 +92,7 @@ public class CollegeCardAdapter extends RecyclerView.Adapter<CollegeCardAdapter.
                         Picasso.with(AppController.getInstance())
                                 .load(url)
                                 .into(holder.thumbnail);
-                        PrefsManager.writeToPrefs(PreferenceHeader.IMAGE_ID, college.getName(), url);
+                        PrefsManager.writeToPrefs(PreferenceHeader.IMAGE_ID, college.getDomain(), url);
                     }
                 }
 

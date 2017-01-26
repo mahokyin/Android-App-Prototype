@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BingApiClient {
     public static final String BASE_URL = "https://api.cognitive.microsoft.com/bing/v5.0/images/";
-    public static final String API_KEY = "a8af316e4d1b4e97913bfa13601aeda6";
+    public static final String API_KEY = "0757c016a7da45b498844f842d9b2858";
     private static Retrofit retrofit = null;
 
 

@@ -19,8 +19,6 @@ import com.mahokyin.showcollege.helper.ThreadUtils;
 import com.mahokyin.showcollege.settings.PreferenceKey;
 import com.mahokyin.showcollege.settings.PrefsManager;
 
-import org.reactivestreams.Subscriber;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
@@ -211,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
 
             @Override
             public void onComplete() {
-                Toast.makeText(getApplicationContext(), "Count: " + count, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Count: " + count, Toast.LENGTH_LONG).show();
                 mainRecycleFragment.updateRecycleView();
                 mainRecycleFragment.setLoadingStatus(true);
             }

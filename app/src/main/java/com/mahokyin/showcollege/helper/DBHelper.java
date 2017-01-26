@@ -143,18 +143,6 @@ public class DBHelper extends SQLiteOpenHelper {
 		return collegeList;
 	}
 
-	// Updating single contact
-//	public int updateContact(Contact contact) {
-//		SQLiteDatabase db = this.getWritableDatabase();
-//
-//		ContentValues values = new ContentValues();
-//		values.put(KEY_NAME, contact.getName());
-//		values.put(KEY_PH_NO, contact.getPhoneNumber());
-//
-//		// updating row
-//		return db.update(TABLE_COLLEGE, values, KEY_ID + " = ?",
-//				new String[] { String.valueOf(contact.getID()) });
-//	}
 
 	// Deleting single contact
 	public void deleteContact(College contact) {
