@@ -95,6 +95,30 @@ public class DBHelper extends SQLiteOpenHelper {
 		// return contact
 		return contact;
 	}
+
+	public College getCollege(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+//		Cursor cursor = db.query(TABLE_COLLEGE, new String[] { KEY_ID,
+//						KEY_NAME, KEY_DOMAIN, KEY_WEB_PAGE, KEY_COUNTRY, KEY_COUNTRY_CODE}, KEY_ID + "=?",
+//				new String[] { String.valueOf(id) }, null, null, null, null);
+
+		Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_COLLEGE + " WHERE " +
+				KEY_ID + "=?", new String[] { Integer.toString(id) } );
+
+		if (cursor != null) {
+			cursor.moveToFirst();
+			College college = new College();
+			college.setName(cursor.getString(1));
+			college.setDomain(cursor.getString(2));
+			college.setWebPage(cursor.getString(3));
+			college.setCountry(cursor.getString(4));
+			college.setCountryCode(cursor.getString(5));
+			return college;
+		}
+		// return contact
+		return null;
+	}
 	
 	// Getting All Contacts
 	public List<College> getAllColleges() {

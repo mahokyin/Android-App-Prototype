@@ -26,6 +26,8 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import icepick.State;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
     private List<College> collegeList;
     private MainRecycleFragment mainRecycleFragment;
     private Bundle bundle;
+
+    @State int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +123,14 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
                     collegeList = new ArrayList<>();
                     if (PrefsManager.getFromPrefs(PreferenceKey.FIRST_USE, true)) {
                         if (list != null) {
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 0; i < 1000; i++) {
                                 AppController.getDbHelper().addCollege(list.get(i));
-                                collegeList.add(list.get(i));
                             }
+
+                            for (int i = 0; i < 10; i++) {
+                                collegeList.add(AppController.getDbHelper().getCollege(i));
+                            }
+                            count = collegeList.size();
                         }
                         PrefsManager.writeToPrefs(PreferenceKey.FIRST_USE, false);
                         Timber.d("Finish loading from default file");
@@ -177,8 +185,11 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
                 List<College> updateList = new ArrayList<>();
-                updateList.addAll(AppController.getDbHelper().getAllColleges());
+                for (int i = count; i < count + 10; i++) {
+                    updateList.add(AppController.getDbHelper().getCollege(i));
+                }
                 collegeList.addAll(updateList);
+                count = collegeList.size();
                 e.onComplete();
             }
         }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new Observer<String>() {
