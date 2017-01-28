@@ -176,7 +176,7 @@ public class MainRecycleFragment extends Fragment {
     }
 
     public interface MainActInterface {
-        List<College> getList();
+        ArrayList<College> getList();
         void init(View view);
         void updateCollegeList();
     }
