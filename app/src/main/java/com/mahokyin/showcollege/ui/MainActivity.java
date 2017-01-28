@@ -37,7 +37,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainRecycleFragment.MainActInterface {
 
-    private List<College> collegeList;
+    private ArrayList<College> collegeList;
     private MainRecycleFragment mainRecycleFragment;
     private Bundle bundle;
 
@@ -53,10 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
 
     @Override public void onSaveInstanceState(Bundle outState) {
         if (collegeList != null) {
-            if (!(collegeList instanceof ArrayList)) {
-                collegeList = new ArrayList<>(collegeList);
-            }
-            outState.putParcelableArrayList("collegeList", (ArrayList) collegeList);
+            outState.putParcelableArrayList("collegeList", collegeList);
         }
         super.onSaveInstanceState(outState);
     }
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
                     e.onNext("Parsing JSON file (On Main Thread: " + ThreadUtils.isMainThread() + ")");
                     Type listType = new TypeToken<ArrayList<College>>() {
                     }.getType();
-                    List<College> list = new Gson().fromJson(json, listType);
+                    ArrayList<College> list = new Gson().fromJson(json, listType);
 
                     collegeList = new ArrayList<>();
                     if (PrefsManager.getFromPrefs(PreferenceKey.FIRST_USE, true)) {
@@ -185,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
-                List<College> updateList = new ArrayList<>();
+                ArrayList<College> updateList = new ArrayList<>();
                 for (int i = count + 1; i <= count + 10; i++) {
                     updateList.add(AppController.getDbHelper().getCollege(i));
                 }
