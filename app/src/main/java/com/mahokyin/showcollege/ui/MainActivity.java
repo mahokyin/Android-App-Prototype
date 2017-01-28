@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements MainRecycleFragme
 
 
     @Override
-    public List<College> getList() {
+    public ArrayList<College> getList() {
         return collegeList;
     }
 
