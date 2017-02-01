@@ -10,4 +10,4 @@ Image caching: Picasso (Thread safe)
 
 Async programming: RxJava, Retrofit (Thread Safe)
 
-<img src="https://github.com/mahokyin/Android-App-Prototype/blob/master/Drawing1.jpg" width="800" height="400" />
+<img src="https://github.com/mahokyin/Android-App-Prototype/blob/master/Drawing1.jpg" width="800" height="600" />
