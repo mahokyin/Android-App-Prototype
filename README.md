@@ -9,3 +9,5 @@ Rotation: Parcelable / IcePick (3rd lib)
 Image caching: Picasso (Thread safe)
 
 Async programming: RxJava, Retrofit (Thread Safe)
+
+![alt tag](https://github.com/mahokyin/Android-App-Prototype/blob/master/Drawing1)
